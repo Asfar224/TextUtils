@@ -16,22 +16,37 @@ export default function Textform(props) {
          setText(lowcasetext);
     }
 
+    const handleclear = ()=>{
+        setText('');
+    }
+
+    const handlecopy = ()=>{
+        let txt = document.getElementById("mybox");
+        txt.select();
+        navigator.clipboard.writeText(txt.value);
+    }
+
     const [text, setText] = useState('Enter text here');
 
     return (
         <>
+           <div  style={{color : props.theme === 'light' ? 'black' : 'white'}}>
             <div className="Container">
-                <h1 style={{marginTop : '20px'}}>{props.heading}</h1>
+                <h1 style={{marginTop : '30px'}}>{props.heading}</h1>
                 <div className="mb-3">
                     <label for="mybox" className="form-label"></label>
                     <textarea className="form-control" value={text} onChange={handleonchange} id="mybox" rows="8"></textarea>
                 </div>
                 <button className="btn btn-primary" onClick={handleupcase}  >Convert to Uppercase</button>
                 <button className="btn btn-primary" onClick={handlelowcase}  style={{marginLeft:'15px'}}>Convert to Lowercase</button>
+                <button className="btn btn-primary" onClick={handleclear}  style={{marginLeft : '15px'}} >Clear</button>
+                <button className="btn btn-primary" onClick={handlecopy}  style={{marginLeft : '15px'}} >Copy text</button> 
+
+
             </div>
             <div className="Container" >
-                <h1 style={{marginTop : '15px'}}>
-                    Your text analytics are :
+                <h1 style={{marginTop : '30px'}}>
+                    Your text Analytics are :
                 </h1>
                 <table style={{borderCollapse :'collapse', width :'20%', marginTop :'15px'}}>
                     <thead>
@@ -49,6 +64,7 @@ export default function Textform(props) {
                 </table>
                 <p style={{fontWeight :'600', marginTop:'15px'}}>- Time needed to read this text is : {0.008 * text.split(" ").length} seconds</p>
   
+            </div>
             </div>
         </>
     )
