@@ -5,6 +5,7 @@ export default function Textform(props) {
     const handleupcase = () => {
         let newtext = text.toUpperCase();
         setText(newtext);
+        props.changealert("Text converted to uppercase","success");
     }
 
     const handleonchange = (event) => {
@@ -14,16 +15,19 @@ export default function Textform(props) {
     const handlelowcase= () =>{
         let lowcasetext= text.toLowerCase();
          setText(lowcasetext);
+         props.changealert("Text converted to lowercase","success");
     }
 
     const handleclear = ()=>{
         setText('');
+        props.changealert("Text cleared","success");
     }
 
     const handlecopy = ()=>{
         let txt = document.getElementById("mybox");
         txt.select();
         navigator.clipboard.writeText(txt.value);
+        props.changealert("Text coppied to clipboard","success");
     }
 
     const [text, setText] = useState('Enter text here');
